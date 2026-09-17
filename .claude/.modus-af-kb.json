@@ -1,0 +1,24 @@
+{
+  "version": "v0.0.1-BETA",
+  "roles": [
+    "software-engineer"
+  ],
+  "scope": "project",
+  "environment": "production",
+  "synced_files": [
+    "CLAUDE.md",
+    "agents/maf-se-builder/AGENT.md",
+    "agents/maf-se-orchestrator/AGENT.md",
+    "skills/maf-se-address-pull-request-feedback/SKILL.md",
+    "skills/maf-se-create-graph-plan/SKILL.md",
+    "skills/maf-se-create-plan/SKILL.md",
+    "skills/maf-se-create-pull-request/SKILL.md",
+    "skills/maf-se-fetch-jira-ticket/SKILL.md",
+    "skills/maf-se-fetch-linear-ticket/SKILL.md",
+    "skills/maf-se-run-graph-plan/SKILL.md",
+    "skills/maf-se-start-code-review/SKILL.md",
+    "skills/maf-skill-cost-audit/SKILL.md"
+  ],
+  "last_updated": "2026-09-17T09:07:54.359767+00:00",
+  "merged_claude_md_hash": "bb83e72a261677a6ae3ab76799cc0f9ead26800f5018435239e360e1e8dd4da8"
+}
