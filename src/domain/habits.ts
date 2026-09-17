@@ -1,6 +1,7 @@
 import type { Database } from "better-sqlite3";
 import { randomUUID } from "node:crypto";
 import { computeStreaks } from "./streaks.js";
+import { todayUtc } from "./dates.js";
 
 export interface Habit {
   id: string;
@@ -11,6 +12,7 @@ export interface Habit {
 export interface HabitWithStreaks extends Habit {
   currentStreak: number;
   longestStreak: number;
+  todayDone: boolean;
 }
 
 export function isNameTaken(db: Database, name: string): boolean {
@@ -45,12 +47,15 @@ export function listHabitsWithStreaks(db: Database): HabitWithStreaks[] {
     "SELECT date FROM habit_entries WHERE habit_id = ? AND done = 1 ORDER BY date ASC"
   );
 
+  const today = todayUtc();
+
   return habits.map((habit) => {
     const doneDates = (doneDatesStmt.all(habit.id) as { date: string }[]).map(
       (row) => row.date
     );
     const streaks = computeStreaks(doneDates);
-    return { ...habit, ...streaks };
+    const todayDone = doneDates.includes(today);
+    return { ...habit, ...streaks, todayDone };
   });
 }
 
