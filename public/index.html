@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Habit Tracker</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main>
+    <h1>Habit Tracker</h1>
+
+    <form id="add-habit-form" novalidate>
+      <input
+        id="habit-name-input"
+        type="text"
+        placeholder="New habit name"
+        autocomplete="off"
+        maxlength="100"
+      />
+      <button id="add-habit-button" type="submit" disabled>Add</button>
+      <p id="add-habit-error" class="error" role="alert" hidden></p>
+    </form>
+
+    <p id="empty-state" hidden>Add your first habit above</p>
+
+    <ul id="habit-list"></ul>
+  </main>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
