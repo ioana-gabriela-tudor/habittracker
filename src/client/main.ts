@@ -7,8 +7,12 @@ const addError = document.getElementById("add-habit-error") as HTMLParagraphElem
 const emptyState = document.getElementById("empty-state") as HTMLParagraphElement;
 const habitList = document.getElementById("habit-list") as HTMLUListElement;
 
-function todayUtc(): string {
-  return new Date().toISOString().slice(0, 10);
+function todayLocal(): string {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
 }
 
 function showAddError(message: string) {
@@ -54,7 +58,7 @@ function habitRow(habit: Habit): HTMLLIElement {
   name.className = "habit-name";
   name.textContent = habit.name;
 
-  const today = todayUtc();
+  const today = todayLocal();
   const toggle = document.createElement("button");
   toggle.type = "button";
   toggle.className = "today-toggle";

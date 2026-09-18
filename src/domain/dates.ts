@@ -1,13 +1,17 @@
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
-/** Today's date in UTC, as "YYYY-MM-DD". */
-export function todayUtc(): string {
-  return new Date().toISOString().slice(0, 10);
+/** Today's date in the server's local timezone, as "YYYY-MM-DD". */
+export function todayLocal(): string {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
 }
 
 /**
  * Validates that `value` is a real calendar date in "YYYY-MM-DD" format
- * and not later than the server's UTC "today".
+ * and not later than today's local calendar day.
  */
 export function isValidPastOrPresentDate(value: string): boolean {
   if (!DATE_RE.test(value)) return false;
@@ -20,7 +24,7 @@ export function isValidPastOrPresentDate(value: string): boolean {
     date.getUTCDate() === day;
   if (!isRealDate) return false;
 
-  return value <= todayUtc();
+  return value <= todayLocal();
 }
 
 /** Returns the date one day before `value` ("YYYY-MM-DD"). */

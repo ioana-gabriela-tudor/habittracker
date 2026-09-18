@@ -5,8 +5,12 @@ const addButton = document.getElementById("add-habit-button");
 const addError = document.getElementById("add-habit-error");
 const emptyState = document.getElementById("empty-state");
 const habitList = document.getElementById("habit-list");
-function todayUtc() {
-    return new Date().toISOString().slice(0, 10);
+function todayLocal() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const day = String(now.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
 }
 function showAddError(message) {
     addError.textContent = message;
@@ -46,7 +50,7 @@ function habitRow(habit) {
     const name = document.createElement("span");
     name.className = "habit-name";
     name.textContent = habit.name;
-    const today = todayUtc();
+    const today = todayLocal();
     const toggle = document.createElement("button");
     toggle.type = "button";
     toggle.className = "today-toggle";

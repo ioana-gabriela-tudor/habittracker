@@ -1,4 +1,4 @@
-import { addDays, todayUtc } from "./dates.js";
+import { addDays, todayLocal } from "./dates.js";
 
 export interface StreakResult {
   currentStreak: number;
@@ -25,7 +25,7 @@ export function computeStreaks(doneDates: string[]): StreakResult {
     previousDate = date;
   }
 
-  const today = todayUtc();
+  const today = todayLocal();
   const yesterday = addDays(today, -1);
 
   let anchor: string | null = null;

@@ -1,7 +1,7 @@
 import type { Database } from "better-sqlite3";
 import { randomUUID } from "node:crypto";
 import { computeStreaks } from "./streaks.js";
-import { todayUtc } from "./dates.js";
+import { todayLocal } from "./dates.js";
 
 export interface Habit {
   id: string;
@@ -47,7 +47,7 @@ export function listHabitsWithStreaks(db: Database): HabitWithStreaks[] {
     "SELECT date FROM habit_entries WHERE habit_id = ? AND done = 1 ORDER BY date ASC"
   );
 
-  const today = todayUtc();
+  const today = todayLocal();
 
   return habits.map((habit) => {
     const doneDates = (doneDatesStmt.all(habit.id) as { date: string }[]).map(
